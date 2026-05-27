@@ -1,0 +1,58 @@
+<!-- src/app/shared/navbar/navbar.component.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top shadow">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/">Essencia Fit</a>
+
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/productos" routerLinkActive="active">Productos</a>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="categorias().length > 0">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categorías</a>
+          <ul class="dropdown-menu">
+            <li *ngFor="let cat of categorias()">
+              <a class="dropdown-item" [routerLink]="['/productos/categoria', cat.id]">
+                {{ cat.nombre }}
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
+        </li>
+      </ul>
+
+      <!-- Auth buttons -->
+      <div class="d-flex align-items-center ms-3">
+        <ng-container *ngIf="auth.isLoggedIn(); else anonimo">
+          <span class="text-white me-2">
+            Hola, <strong>{{ auth.currentUser()?.nombre }}</strong>
+          </span>
+          <a routerLink="/carrito" class="btn btn-warning me-2">🛒 Carrito</a>
+          <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+        </ng-container>
+
+        <ng-template #anonimo>
+          <a routerLink="/login" class="btn btn-outline-light me-2">Login</a>
+          <a routerLink="/registro" class="btn btn-light">Registro</a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Espaciado para compensar navbar fixed -->
+<div style="margin-top: 76px;"></div>

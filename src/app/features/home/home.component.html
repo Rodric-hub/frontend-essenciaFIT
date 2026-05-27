@@ -1,0 +1,90 @@
+<!-- src/app/features/home/home.component.html -->
+
+<!-- Flash message -->
+<div *ngIf="msgExito()" class="container mt-2">
+  <div class="alert alert-success text-center">{{ msgExito() }}</div>
+</div>
+
+<!-- CARRUSEL -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1"
+           class="d-block w-100" alt="Suplementos" style="height:80vh;object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 class="fw-bold">Una sola compra</h2>
+        <p>Gasto + Descuento en tus suplementos favoritos</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1"
+           class="d-block w-100" alt="Fitness" style="height:80vh;object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 class="fw-bold">Aliméntate sano</h2>
+        <p>Snacks y suplementos de calidad</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- PRODUCTOS -->
+<section id="productos" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">Suplementos más Populares</h2>
+
+    <div class="mb-3">
+      <a routerLink="/productos" class="text-success fw-bold">➜ Ver todos los productos</a>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3" *ngFor="let producto of productos()">
+        <div class="card h-100 shadow-sm">
+          <img [src]="producto.imagenUrl" class="card-img-top" [alt]="producto.nombre"
+               style="height:250px;object-fit:cover;">
+          <div class="card-body text-center d-flex flex-column justify-content-between">
+            <div>
+              <h5 class="card-title">{{ producto.nombre }}</h5>
+              <p class="text-danger fw-bold">S/ {{ producto.precio }}</p>
+            </div>
+
+            <div>
+              <!-- Logueado y con stock -->
+              <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
+                      class="btn btn-success w-100"
+                      (click)="agregarAlCarrito(producto.id)">
+                Añadir al carrito
+              </button>
+
+              <!-- No logueado -->
+              <a *ngIf="!auth.isLoggedIn()"
+                 routerLink="/login"
+                 class="btn btn-success w-100">
+                Añadir al carrito
+              </a>
+
+              <!-- Sin stock -->
+              <button *ngIf="producto.stock === 0"
+                      class="btn btn-secondary w-100" disabled>
+                Agotado
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white text-center py-4 mt-auto">
+  <div class="container">
+    <p class="mb-0">© 2025 - Essencia Fit | Proyecto Universitario UTP</p>
+    <p class="small">Villa el Salvador - Lima, Perú</p>
+  </div>
+</footer>

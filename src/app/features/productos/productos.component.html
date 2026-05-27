@@ -1,0 +1,75 @@
+<!-- src/app/features/productos/productos.component.html -->
+<div *ngIf="msgExito()" class="container mt-2">
+  <div class="alert alert-success text-center">{{ msgExito() }}</div>
+</div>
+
+<main class="container mt-4">
+  <div class="row">
+
+    <!-- FILTROS -->
+    <div class="col-md-3">
+      <div class="bg-light rounded p-3">
+        <h5 class="text-success fw-bold border-bottom border-success pb-2">Categorías</h5>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a routerLink="/productos" class="text-decoration-none text-dark fw-500">Todos</a>
+          </li>
+          <li class="list-group-item" *ngFor="let cat of categorias()">
+            <a [routerLink]="['/productos/categoria', cat.id]"
+               class="text-decoration-none text-dark">
+              {{ cat.nombre }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div class="col-md-9">
+      <div class="row g-4">
+        <div class="col-md-4 col-sm-6" *ngFor="let producto of productos()">
+          <div class="card h-100 shadow-sm">
+            <img [src]="producto.imagenUrl" class="card-img-top p-3"
+                 [alt]="producto.nombre" style="height:220px;object-fit:cover;">
+            <div class="card-body text-center d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="text-danger fw-bold">S/ {{ producto.precio }}</p>
+              </div>
+              <div>
+                <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
+                        class="btn btn-success w-100"
+                        (click)="agregarAlCarrito(producto.id)">
+                  Añadir al carrito
+                </button>
+
+                <a *ngIf="!auth.isLoggedIn()"
+                   routerLink="/login"
+                   class="btn btn-success w-100">
+                  Añadir al carrito
+                </a>
+
+                <button *ngIf="producto.stock === 0"
+                        class="btn btn-secondary w-100" disabled>
+                  Agotado
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="productos().length === 0" class="col-12 text-center text-muted py-5">
+          No hay productos en esta categoría.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+  <div class="container">
+    <p class="mb-0">© 2025 - Essencia Fit | Proyecto Universitario UTP</p>
+    <p class="small">Villa el Salvador - Lima, Perú</p>
+  </div>
+</footer>
