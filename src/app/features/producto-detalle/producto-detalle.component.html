@@ -1,0 +1,147 @@
+<div class="container mt-5" *ngIf="producto">
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="row bg-white shadow rounded p-4">
+    <!-- IMAGEN -->
+    <div class="col-md-6 text-center">
+      <img
+        [src]="producto.imagenUrl"
+        [alt]="producto.nombre"
+        class="img-fluid rounded shadow-sm"
+        style="max-height: 450px; object-fit: contain"
+      />
+    </div>
+
+    <!-- INFORMACION -->
+    <div class="col-md-6">
+      <span class="badge bg-success">
+        {{ producto.categoria.nombre }}
+      </span>
+
+      <h1 class="fw-bold mt-3">
+        {{ producto.nombre }}
+      </h1>
+
+      <h2 class="text-success fw-bold">S/ {{ producto.precio }}</h2>
+
+      <p class="text-muted">
+        {{ producto.descripcion }}
+      </p>
+
+      <button class="btn btn-success btn-lg w-100 mt-3" (click)="agregarCarrito()">
+        🛒 Agregar al carrito
+      </button>
+
+      <hr />
+
+      <div class="row text-center">
+        <div class="col">
+          <div class="border rounded p-3">
+            📦
+
+            <br />
+
+            <b>{{ producto.stock }}</b>
+
+            <br />
+
+            unidades disponibles
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="border rounded p-3">
+            ⭐
+
+            <br />
+
+            Producto original
+
+            <br />
+
+            Garantía segura
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARACTERISTICAS + ESPECIFICACIONES -->
+
+  <div class="row mt-4">
+    <!-- CARACTERISTICAS -->
+
+    <div class="col-md-6">
+      <div class="bg-white shadow rounded p-4 h-100">
+        <h3 class="fw-bold">✨ Características</h3>
+
+        <!-- PROTEINAS -->
+
+        <ul *ngIf="producto.categoria.nombre.includes('Prote')">
+          <li>Alto contenido de proteína</li>
+
+          <li>Ayuda a la recuperación muscular</li>
+
+          <li>Ideal después del entrenamiento</li>
+
+          <li>Favorece el desarrollo muscular</li>
+        </ul>
+
+        <!-- CREATINA -->
+
+        <ul *ngIf="producto.categoria.nombre.includes('Creat')">
+          <li>Mejora la fuerza y potencia</li>
+
+          <li>Aumenta el rendimiento deportivo</li>
+
+          <li>Ideal para entrenamientos intensos</li>
+
+          <li>Favorece la recuperación muscular</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ESPECIFICACIONES -->
+
+    <div class="col-md-6">
+      <div class="bg-white shadow rounded p-4 h-100">
+        <h3 class="fw-bold">📋 Especificaciones</h3>
+
+        <table class="table mt-3">
+          <tr>
+            <td class="fw-bold">Nombre</td>
+
+            <td>
+              {{ producto.nombre }}
+            </td>
+          </tr>
+
+          <tr>
+            <td class="fw-bold">Categoría</td>
+
+            <td>
+              {{ producto.categoria.nombre }}
+            </td>
+          </tr>
+
+          <tr>
+            <td class="fw-bold">Precio</td>
+
+            <td>S/ {{ producto.precio }}</td>
+          </tr>
+
+          <tr>
+            <td class="fw-bold">Stock</td>
+
+            <td>{{ producto.stock }} unidades</td>
+          </tr>
+
+          <tr>
+            <td class="fw-bold">Estado</td>
+
+            <td>Disponible</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
