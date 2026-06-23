@@ -44,7 +44,7 @@
 
     <div class="row g-4">
       <div class="col-md-3" *ngFor="let producto of productos()">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100 shadow-sm" [routerLink]="['/productos', producto.id]" style="cursor:pointer;">
           <img [src]="producto.imagenUrl" class="card-img-top" [alt]="producto.nombre"
                style="height:250px;object-fit:cover;">
           <div class="card-body text-center d-flex flex-column justify-content-between">
@@ -57,7 +57,7 @@
               <!-- Logueado y con stock -->
               <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
                       class="btn btn-success w-100"
-                      (click)="agregarAlCarrito(producto.id)">
+                      (click)="agregarAlCarrito(producto.id); $event.stopPropagation()">
                 Añadir al carrito
               </button>
 
