@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../core/services/carrito.service';
 import { CarritoItem } from '../../core/models/models';
+import { CarritoResponse } from '../../core/models/models';
 
 @Component({
   selector: 'app-carrito',
@@ -25,7 +26,7 @@ export class CarritoComponent implements OnInit {
   }
 
   cargar() {
-    this.carritoService.getCarrito().subscribe(res => {
+    this.carritoService.getCarrito().subscribe((res: CarritoResponse) => {
       this.items.set(res.items);
       this.total.set(res.total);
     });

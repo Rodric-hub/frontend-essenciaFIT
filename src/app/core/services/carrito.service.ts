@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CarritoResponse } from '../models/models';
 
 @Injectable({ providedIn: 'root' })
 export class CarritoService {
@@ -9,7 +10,7 @@ private api = 'https://backend-essenciafit.onrender.com/api/carrito';
 constructor(private http: HttpClient) {}
 
 getCarrito() {
-  return this.http.get(this.api);
+  return this.http.get<CarritoResponse>(this.api);
 }
 
 agregar(productoId: number, cantidad = 1) {
