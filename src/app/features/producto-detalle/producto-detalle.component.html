@@ -100,6 +100,31 @@
 
           <li>Favorece la recuperación muscular</li>
         </ul>
+
+        <!-- BOLSAS DE PROTEINA -->
+<ul *ngIf="producto.categoria.nombre.includes('Bolsa')">
+  <li>Formato económico de mayor rendimiento</li>
+  <li>Ideal para consumo diario prolongado</li>
+  <li>Misma calidad nutricional que el formato en pote</li>
+  <li>Fácil de almacenar y dosificar</li>
+</ul>
+
+<!-- PRE-ENTRENO -->
+<ul *ngIf="producto.categoria.nombre.includes('Pre-entreno')">
+  <li>Aumenta la energía y el enfoque mental</li>
+  <li>Mejora el rendimiento durante el entrenamiento</li>
+  <li>Retrasa la fatiga muscular</li>
+  <li>Favorece la vasodilatación y el bombeo muscular</li>
+</ul>
+
+<!-- PRECURSORES -->
+<ul *ngIf="producto.categoria.nombre.includes('Precursor')">
+  <li>Estimula la producción hormonal natural</li>
+  <li>Favorece el aumento de masa muscular</li>
+  <li>Mejora la recuperación post-entrenamiento</li>
+  <li>Apoya el rendimiento físico general</li>
+</ul>
+
       </div>
     </div>
 

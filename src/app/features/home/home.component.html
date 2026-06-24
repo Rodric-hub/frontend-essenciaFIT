@@ -40,58 +40,186 @@
   </div>
 </section>
 
-<!-- PRODUCTOS -->
-<section id="productos" class="py-5">
-  <div class="container">
-    <h2 class="text-center mb-5">Suplementos más Populares</h2>
-
-    <div class="mb-3">
-      <a routerLink="/productos" class="text-success fw-bold">➜ Ver todos los productos</a>
+<!-- PRODUCTOS POR CATEGORÍA -->
+<section class="categorySection" *ngIf="proteinas().length > 0">
+  <div class="categoryInner">
+    <div class="categoryHeader">
+      <h2 class="categoryTitulo">Proteínas</h2>
     </div>
-
-    <div class="row g-4">
-      <div class="col-md-3" *ngFor="let producto of productos()">
-        <div class="card h-100 shadow-sm" [routerLink]="['/productos', producto.id]" style="cursor:pointer;">
-          <img [src]="producto.imagenUrl" class="card-img-top" [alt]="producto.nombre"
-               style="height:250px;object-fit:cover;">
-          <div class="card-body text-center d-flex flex-column justify-content-between">
-            <div>
-              <h5 class="card-title">{{ producto.nombre }}</h5>
-              <p class="text-danger fw-bold">S/ {{ producto.precio }}</p>
-            </div>
-
-            <div>
-              <!-- Logueado y con stock -->
-              <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
-                      class="btn btn-success w-100"
-                      (click)="agregarAlCarrito(producto.id); $event.stopPropagation()">
-                Añadir al carrito
-              </button>
-
-              <!-- No logueado -->
-              <a *ngIf="!auth.isLoggedIn()"
-                 routerLink="/login"
-                 class="btn btn-success w-100">
-                Añadir al carrito
-              </a>
-
-              <!-- Sin stock -->
-              <button *ngIf="producto.stock === 0"
-                      class="btn btn-secondary w-100" disabled>
-                Agotado
-              </button>
-            </div>
+    <div class="carouselWrapper">
+      <button class="carouselArrow" (click)="prevCategoria('proteinas')"
+              [disabled]="getPaginaActual('proteinas') === 0">‹</button>
+      <div class="categoryGrid">
+        <div class="productCard" *ngFor="let producto of getPagina('proteinas', proteinas())"
+             [routerLink]="['/productos', producto.id]">
+          <img [src]="producto.imagenUrl" [alt]="producto.nombre" class="productImg">
+          <div class="productInfo">
+            <h5 class="productNombre">{{ producto.nombre }}</h5>
+            <p class="productPrecio">S/ {{ producto.precio }}</p>
+            <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
+                    class="btn btn-success w-100"
+                    (click)="agregarAlCarrito(producto.id); $event.stopPropagation()">
+              Añadir al carrito
+            </button>
+            <a *ngIf="!auth.isLoggedIn() && producto.stock > 0"
+               routerLink="/login" class="btn btn-success w-100">
+              Añadir al carrito
+            </a>
+            <button *ngIf="producto.stock === 0" class="btn btn-secondary w-100" disabled>
+              Agotado
+            </button>
           </div>
         </div>
       </div>
+      <button class="carouselArrow" (click)="nextCategoria('proteinas', proteinas())"
+              [disabled]="getPaginaActual('proteinas') >= getTotalPaginas(proteinas()) - 1">›</button>
+    </div>
+  </div>
+</section>
+
+<section class="categorySection categorySectionAlt" *ngIf="creatinas().length > 0">
+  <div class="categoryInner">
+    <div class="categoryHeader">
+      <h2 class="categoryTitulo">Creatina</h2>
+    </div>
+    <div class="carouselWrapper">
+      <button class="carouselArrow" (click)="prevCategoria('creatinas')"
+              [disabled]="getPaginaActual('creatinas') === 0">‹</button>
+      <div class="categoryGrid">
+        <div class="productCard" *ngFor="let producto of getPagina('creatinas', creatinas())"
+             [routerLink]="['/productos', producto.id]">
+          <img [src]="producto.imagenUrl" [alt]="producto.nombre" class="productImg">
+          <div class="productInfo">
+            <h5 class="productNombre">{{ producto.nombre }}</h5>
+            <p class="productPrecio">S/ {{ producto.precio }}</p>
+            <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
+                    class="btn btn-success w-100"
+                    (click)="agregarAlCarrito(producto.id); $event.stopPropagation()">
+              Añadir al carrito
+            </button>
+            <a *ngIf="!auth.isLoggedIn() && producto.stock > 0"
+               routerLink="/login" class="btn btn-success w-100">
+              Añadir al carrito
+            </a>
+            <button *ngIf="producto.stock === 0" class="btn btn-secondary w-100" disabled>
+              Agotado
+            </button>
+          </div>
+        </div>
+      </div>
+      <button class="carouselArrow" (click)="nextCategoria('creatinas', creatinas())"
+              [disabled]="getPaginaActual('creatinas') >= getTotalPaginas(creatinas()) - 1">›</button>
+    </div>
+  </div>
+</section>
+
+<section class="categorySection" *ngIf="bolsas().length > 0">
+  <div class="categoryInner">
+    <div class="categoryHeader">
+      <h2 class="categoryTitulo">Bolsas de proteína</h2>
+    </div>
+    <div class="carouselWrapper">
+      <button class="carouselArrow" (click)="prevCategoria('bolsas')"
+              [disabled]="getPaginaActual('bolsas') === 0">‹</button>
+      <div class="categoryGrid">
+        <div class="productCard" *ngFor="let producto of getPagina('bolsas', bolsas())"
+             [routerLink]="['/productos', producto.id]">
+          <img [src]="producto.imagenUrl" [alt]="producto.nombre" class="productImg">
+          <div class="productInfo">
+            <h5 class="productNombre">{{ producto.nombre }}</h5>
+            <p class="productPrecio">S/ {{ producto.precio }}</p>
+            <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
+                    class="btn btn-success w-100"
+                    (click)="agregarAlCarrito(producto.id); $event.stopPropagation()">
+              Añadir al carrito
+            </button>
+            <a *ngIf="!auth.isLoggedIn() && producto.stock > 0"
+               routerLink="/login" class="btn btn-success w-100">
+              Añadir al carrito
+            </a>
+            <button *ngIf="producto.stock === 0" class="btn btn-secondary w-100" disabled>
+              Agotado
+            </button>
+          </div>
+        </div>
+      </div>
+      <button class="carouselArrow" (click)="nextCategoria('bolsas', bolsas())"
+              [disabled]="getPaginaActual('bolsas') >= getTotalPaginas(bolsas()) - 1">›</button>
+    </div>
+  </div>
+</section>
+
+<section class="categorySection categorySectionAlt" *ngIf="preEntrenos().length > 0">
+  <div class="categoryInner">
+    <div class="categoryHeader">
+      <h2 class="categoryTitulo">Pre-entreno</h2>
+    </div>
+    <div class="carouselWrapper">
+      <button class="carouselArrow" (click)="prevCategoria('preEntrenos')"
+              [disabled]="getPaginaActual('preEntrenos') === 0">‹</button>
+      <div class="categoryGrid">
+        <div class="productCard" *ngFor="let producto of getPagina('preEntrenos', preEntrenos())"
+             [routerLink]="['/productos', producto.id]">
+          <img [src]="producto.imagenUrl" [alt]="producto.nombre" class="productImg">
+          <div class="productInfo">
+            <h5 class="productNombre">{{ producto.nombre }}</h5>
+            <p class="productPrecio">S/ {{ producto.precio }}</p>
+            <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
+                    class="btn btn-success w-100"
+                    (click)="agregarAlCarrito(producto.id); $event.stopPropagation()">
+              Añadir al carrito
+            </button>
+            <a *ngIf="!auth.isLoggedIn() && producto.stock > 0"
+               routerLink="/login" class="btn btn-success w-100">
+              Añadir al carrito
+            </a>
+            <button *ngIf="producto.stock === 0" class="btn btn-secondary w-100" disabled>
+              Agotado
+            </button>
+          </div>
+        </div>
+      </div>
+      <button class="carouselArrow" (click)="nextCategoria('preEntrenos', preEntrenos())"
+              [disabled]="getPaginaActual('preEntrenos') >= getTotalPaginas(preEntrenos()) - 1">›</button>
+    </div>
+  </div>
+</section>
+
+<section class="categorySection" *ngIf="precursores().length > 0">
+  <div class="categoryInner">
+    <div class="categoryHeader">
+      <h2 class="categoryTitulo">Precursores</h2>
+    </div>
+    <div class="carouselWrapper">
+      <button class="carouselArrow" (click)="prevCategoria('precursores')"
+              [disabled]="getPaginaActual('precursores') === 0">‹</button>
+      <div class="categoryGrid">
+        <div class="productCard" *ngFor="let producto of getPagina('precursores', precursores())"
+             [routerLink]="['/productos', producto.id]">
+          <img [src]="producto.imagenUrl" [alt]="producto.nombre" class="productImg">
+          <div class="productInfo">
+            <h5 class="productNombre">{{ producto.nombre }}</h5>
+            <p class="productPrecio">S/ {{ producto.precio }}</p>
+            <button *ngIf="auth.isLoggedIn() && producto.stock > 0"
+                    class="btn btn-success w-100"
+                    (click)="agregarAlCarrito(producto.id); $event.stopPropagation()">
+              Añadir al carrito
+            </button>
+            <a *ngIf="!auth.isLoggedIn() && producto.stock > 0"
+               routerLink="/login" class="btn btn-success w-100">
+              Añadir al carrito
+            </a>
+            <button *ngIf="producto.stock === 0" class="btn btn-secondary w-100" disabled>
+              Agotado
+            </button>
+          </div>
+        </div>
+      </div>
+      <button class="carouselArrow" (click)="nextCategoria('precursores', precursores())"
+              [disabled]="getPaginaActual('precursores') >= getTotalPaginas(precursores()) - 1">›</button>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-dark text-white text-center py-4 mt-auto">
-  <div class="container">
-    <p class="mb-0">© 2025 - Essencia Fit | Proyecto Universitario UTP</p>
-    <p class="small">Villa el Salvador - Lima, Perú</p>
-  </div>
-</footer>
+<app-footer></app-footer>
