@@ -36,7 +36,7 @@ export class ProductoDetalleComponent implements OnInit {
       this.productoService.getPorId(id)
         .subscribe({
 
-          next: (data) => {
+          next: (data: Producto) => {
 
             this.producto = data;
 

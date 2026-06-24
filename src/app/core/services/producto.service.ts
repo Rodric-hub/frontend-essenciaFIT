@@ -4,10 +4,25 @@ import { Producto } from '../models/models';
 
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
-  private api = 'http://localhost:8081/api';
-  constructor(private http: HttpClient) {}
-  getAll() { return this.http.get<Producto[]>(`${this.api}/productos`); }
-  getPorId(id: number) {return this.http.get<Producto>(`${this.api}/productos/${id}`);}
-  getTop8() { return this.http.get<Producto[]>(`${this.api}/productos/top`); }
-  getPorCategoria(id: number) { return this.http.get<Producto[]>(`${this.api}/productos/categoria/${id}`); }
+
+private api = 'https://backend-essenciafit.onrender.com/api';
+
+constructor(private http: HttpClient) {}
+
+getAll() {
+  return this.http.get<Producto[]>(`${this.api}/productos`);
+}
+
+getPorId(id: number) {
+  return this.http.get<Producto>(`${this.api}/productos/${id}`);
+}
+
+getTop8() {
+  return this.http.get<Producto[]>(`${this.api}/productos/top`);
+}
+
+getPorCategoria(id: number) {
+  return this.http.get<Producto[]>(`${this.api}/productos/categoria/${id}`);
+}
+
 }
