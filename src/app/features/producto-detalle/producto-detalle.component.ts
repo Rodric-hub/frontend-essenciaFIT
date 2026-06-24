@@ -40,7 +40,7 @@ export class ProductoDetalleComponent implements OnInit {
 
             this.producto = data;
 
-            this.cd.detectChanges(); // 👈 lo dejas porque en tu proyecto lo necesitas
+            this.cd.detectChanges(); 
 
           },
 
