@@ -3,7 +3,10 @@
      [class.navTransparent]="isHome() && !isScrolled()"
      [class.navSolid]="!isHome() || isScrolled()">
   <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/">Essencia Fit</a>
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/">
+  <img src="/favicon.png" alt="Essencia Fit" style="height: 32px;">
+  Essencia Fit
+</a>
 
     <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse" data-bs-target="#navbarNav">

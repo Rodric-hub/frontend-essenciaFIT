@@ -7,11 +7,12 @@ import { CategoriaService } from '../../core/services/categoria.service';
 import { CarritoService } from '../../core/services/carrito.service';
 import { AuthService } from '../../core/services/auth.service';
 import { Producto, Categoria } from '../../core/models/models';
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+   imports: [CommonModule, RouterLink, FooterComponent],
   templateUrl: './productos.component.html'
 })
 export class ProductosComponent implements OnInit {

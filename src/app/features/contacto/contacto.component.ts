@@ -3,11 +3,14 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactoService } from '../../core/services/contacto.service';
+import { FooterComponent } from '../../shared/footer/footer.component';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink, FooterComponent],
   template: `
     <!-- TÍTULO -->
     <section class="py-5 bg-light">
@@ -54,12 +57,7 @@ import { ContactoService } from '../../core/services/contacto.service';
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-      <div class="container">
-        <p class="mb-0">© 2025 - Essencia Fit | Proyecto Universitario UTP</p>
-        <p class="small">Villa el Salvador - Lima, Perú</p>
-      </div>
-    </footer>
+    <app-footer></app-footer>
   `
 })
 export class ContactoComponent {
