@@ -7,7 +7,7 @@ import { LoginResponse, Usuario } from '../models/models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8081/api/auth';
+  private apiUrl = 'https://backend-essenciafit.onrender.com/api/auth';
 
   // Signals reactivos
   currentUser = signal<Usuario | null>(this.loadUser());
