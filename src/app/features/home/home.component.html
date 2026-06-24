@@ -30,6 +30,16 @@
   </div>
 </section>
 
+<!-- MARCAS -->
+<section class="brandsSection">
+  <p class="brandsTitle">Marcas que respaldan tu entrenamiento</p>
+  <div class="brandsTrack">
+    <div class="brandCard" *ngFor="let brand of brands">
+      <img [src]="brand.logo" [alt]="brand.name" class="brandLogo">
+    </div>
+  </div>
+</section>
+
 <!-- PRODUCTOS -->
 <section id="productos" class="py-5">
   <div class="container">

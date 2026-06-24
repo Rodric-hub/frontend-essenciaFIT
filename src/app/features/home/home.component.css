@@ -107,3 +107,69 @@
     font-size: 1.4rem;
   }
 }
+/* ── Marcas ── */
+.brandsSection {
+  padding: 3rem 2rem;
+  background: #fff;
+  text-align: center;
+}
+
+.brandsTitle {
+  font-family: var(--font-base);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  margin-bottom: 1.8rem;
+}
+
+.brandsTrack {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.brandCard {
+  background: #e6e6e6c0;
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.brandCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(45, 106, 79, 0.18);
+}
+
+.brandLogo {
+  max-width: 100%;
+  max-height: 65px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.brandCard:hover .brandLogo {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .brandsTrack {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .brandsTrack {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
