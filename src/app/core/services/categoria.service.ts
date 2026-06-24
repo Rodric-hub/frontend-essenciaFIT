@@ -4,7 +4,13 @@ import { Categoria } from '../models/models';
 
 @Injectable({ providedIn: 'root' })
 export class CategoriaService {
-  private api = 'http://localhost:8081/api/categorias';
-  constructor(private http: HttpClient) {}
-  getAll() { return this.http.get<Categoria[]>(this.api); }
+
+private api = 'https://backend-essenciafit.onrender.com/api/categorias';
+
+constructor(private http: HttpClient) {}
+
+getAll() {
+  return this.http.get<Categoria[]>(this.api);
+}
+
 }
