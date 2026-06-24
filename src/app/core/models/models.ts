@@ -22,7 +22,7 @@ export interface CarritoItem {
 }
 
 export interface CarritoResponse {
-  items: CarritoItem[];
+  items: any[];
   total: number;
 }
 
