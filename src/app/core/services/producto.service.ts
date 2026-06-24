@@ -14,7 +14,7 @@ getAll() {
 }
 
 getPorId(id: number) {
-  return this.http.get(`${this.api}/productos/${id}`);
+  return this.http.get<Producto>(`${this.api}/productos/${id}`);
 }
 
 getTop8() {
