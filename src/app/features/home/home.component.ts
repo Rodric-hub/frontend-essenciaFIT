@@ -23,6 +23,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentSlide = 0;
   private autoplayInterval?: ReturnType<typeof setInterval>;
 
+  brands = [
+  { name: 'Dymatize', logo: '/img/brands/dymatize.png' },
+  { name: 'Optimum Nutrition', logo: '/img/brands/optimum-nutrition.png' },
+  { name: 'MuscleTech', logo: '/img/brands/muscletech.png' },
+  { name: 'MyProtein', logo: '/img/brands/myprotein.png' },
+  { name: 'BSN', logo: '/img/brands/bsn.png' },
+  { name: 'Universal Nutrition', logo: '/img/brands/universal-nutrition.png' },
+];
+
   constructor(
     private productoService: ProductoService,
     private carritoService: CarritoService,
