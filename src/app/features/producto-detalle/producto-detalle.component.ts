@@ -5,12 +5,12 @@ import { ProductoService } from '../../core/services/producto.service';
 import { CarritoService } from '../../core/services/carrito.service';
 import { Producto } from '../../core/models/models';
 import { AuthService } from '../../core/services/auth.service';
-
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-producto-detalle',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FooterComponent],
   templateUrl: './producto-detalle.component.html'
 })
 export class ProductoDetalleComponent implements OnInit {
