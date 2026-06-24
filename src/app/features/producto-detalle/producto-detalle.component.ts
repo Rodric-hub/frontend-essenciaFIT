@@ -1,9 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from '../../core/services/producto.service';
 import { CarritoService } from '../../core/services/carrito.service';
 import { Producto } from '../../core/models/models';
+import { AuthService } from '../../core/services/auth.service';
+
 
 @Component({
   selector: 'app-producto-detalle',
@@ -14,14 +16,16 @@ import { Producto } from '../../core/models/models';
 export class ProductoDetalleComponent implements OnInit {
 
   producto: Producto | null = null;
+  mensaje = '';
 
   constructor(
     private route: ActivatedRoute,
     private productoService: ProductoService,
     private carritoService: CarritoService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router,
+    public auth: AuthService
   ) {}
-
 
   ngOnInit() {
 
@@ -29,18 +33,14 @@ export class ProductoDetalleComponent implements OnInit {
 
       const id = Number(params.get('id'));
 
-      console.log("ID:", id);
-
       this.productoService.getPorId(id)
         .subscribe({
 
           next: (data) => {
 
-            console.log("Producto cargado:", data);
-
             this.producto = data;
 
-            this.cd.detectChanges();
+            this.cd.detectChanges(); 
 
           },
 
@@ -54,17 +54,57 @@ export class ProductoDetalleComponent implements OnInit {
 
   }
 
-
   agregarCarrito(){
 
-    if(this.producto){
+  if(!this.auth.isLoggedIn()){
+    this.router.navigate(['/login']);
+    return;
+  }
 
-      this.carritoService
-      .agregar(this.producto.id)
-      .subscribe();
+
+  if(this.producto){
+
+            this.carritoService
+            .agregar(this.producto.id)
+            .subscribe({
+
+                    next: () => {
+
+                        this.mensaje = '✅ Producto agregado al carrito';
+
+                        this.cd.detectChanges();
+
+                        setTimeout(() => {
+
+                            this.mensaje = '';
+
+                            this.cd.detectChanges();
+
+                        }, 3000);
+
+                    },
+
+                    error: () => {
+
+                        this.mensaje = '❌ Error al agregar producto';
+
+                        this.cd.detectChanges();
+
+                        setTimeout(() => {
+
+                            this.mensaje = '';
+
+                            this.cd.detectChanges();
+
+                        }, 3000);
+
+                    }
+
+                }
+            );
+
+        }
 
     }
-
-  }
 
 }
