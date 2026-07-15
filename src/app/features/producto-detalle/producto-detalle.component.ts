@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProductoService } from '../../core/services/producto.service';
 import { CarritoService } from '../../core/services/carrito.service';
 import { Producto } from '../../core/models/models';
@@ -10,7 +10,11 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 @Component({
   selector: 'app-producto-detalle',
   standalone: true,
-  imports: [CommonModule, FooterComponent],
+  imports: [
+    CommonModule,
+    FooterComponent,
+    RouterLink
+  ],
   templateUrl: './producto-detalle.component.html'
 })
 export class ProductoDetalleComponent implements OnInit {
@@ -40,7 +44,7 @@ export class ProductoDetalleComponent implements OnInit {
 
             this.producto = data;
 
-            this.cd.detectChanges(); 
+            this.cd.detectChanges();
 
           },
 
@@ -54,57 +58,59 @@ export class ProductoDetalleComponent implements OnInit {
 
   }
 
-  agregarCarrito(){
 
-  if(!this.auth.isLoggedIn()){
-    this.router.navigate(['/login']);
-    return;
+  agregarCarrito() {
+
+    if (!this.auth.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    if (this.producto) {
+
+      this.carritoService
+        .agregar(this.producto.id)
+        .subscribe({
+
+          next: () => {
+
+            const modalElement = document.getElementById('productoAgregadoModal');
+
+            if (modalElement) {
+
+              modalElement.classList.add('show');
+              modalElement.style.display = 'block';
+              modalElement.removeAttribute('aria-hidden');
+
+            }
+
+          },
+
+          error: (err) => {
+
+            console.error('Error al agregar producto', err);
+
+          }
+
+        });
+
+    }
+
   }
 
 
-  if(this.producto){
+  cerrarModal() {
 
-            this.carritoService
-            .agregar(this.producto.id)
-            .subscribe({
+    const modalElement = document.getElementById('productoAgregadoModal');
 
-                    next: () => {
+    if (modalElement) {
 
-                        this.mensaje = '✅ Producto agregado al carrito';
-
-                        this.cd.detectChanges();
-
-                        setTimeout(() => {
-
-                            this.mensaje = '';
-
-                            this.cd.detectChanges();
-
-                        }, 3000);
-
-                    },
-
-                    error: () => {
-
-                        this.mensaje = '❌ Error al agregar producto';
-
-                        this.cd.detectChanges();
-
-                        setTimeout(() => {
-
-                            this.mensaje = '';
-
-                            this.cd.detectChanges();
-
-                        }, 3000);
-
-                    }
-
-                }
-            );
-
-        }
+      modalElement.classList.remove('show');
+      modalElement.style.display = 'none';
+      modalElement.setAttribute('aria-hidden', 'true');
 
     }
+
+  }
 
 }

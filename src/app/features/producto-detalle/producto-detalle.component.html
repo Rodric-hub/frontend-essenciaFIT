@@ -1,9 +1,11 @@
 <div *ngIf="mensaje" class="alert alert-success text-center mt-3">
   {{ mensaje }}
 </div>
+
 <div class="container mt-5" *ngIf="producto">
   <!-- CONTENIDO PRINCIPAL -->
   <div class="row bg-white shadow rounded p-4">
+
     <!-- IMAGEN -->
     <div class="col-md-6 text-center">
       <img
@@ -16,6 +18,7 @@
 
     <!-- INFORMACION -->
     <div class="col-md-6">
+
       <span class="badge bg-success">
         {{ producto.categoria.nombre }}
       </span>
@@ -24,29 +27,30 @@
         {{ producto.nombre }}
       </h1>
 
-      <h2 class="text-success fw-bold">S/ {{ producto.precio }}</h2>
+      <h2 class="text-success fw-bold">
+        S/ {{ producto.precio }}
+      </h2>
 
       <p class="text-muted">
         {{ producto.descripcion }}
       </p>
 
-      <button class="btn btn-success btn-lg w-100 mt-3" (click)="agregarCarrito()">
+      <button 
+        class="btn btn-success btn-lg w-100 mt-3"
+        (click)="agregarCarrito()">
         🛒 Agregar al carrito
       </button>
 
       <hr />
 
       <div class="row text-center">
+
         <div class="col">
           <div class="border rounded p-3">
             📦
-
             <br />
-
             <b>{{ producto.stock }}</b>
-
             <br />
-
             unidades disponibles
           </div>
         </div>
@@ -54,123 +58,206 @@
         <div class="col">
           <div class="border rounded p-3">
             ⭐
-
             <br />
-
             Producto original
-
             <br />
-
             Garantía segura
           </div>
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 
   <!-- CARACTERISTICAS + ESPECIFICACIONES -->
 
   <div class="row mt-4">
-    <!-- CARACTERISTICAS -->
 
+    <!-- CARACTERISTICAS -->
     <div class="col-md-6">
+
       <div class="bg-white shadow rounded p-4 h-100">
-        <h3 class="fw-bold">✨ Características</h3>
+
+        <h3 class="fw-bold">
+          ✨ Características
+        </h3>
+
 
         <!-- PROTEINAS -->
-
         <ul *ngIf="producto.categoria.nombre.includes('Prote')">
+
           <li>Alto contenido de proteína</li>
-
           <li>Ayuda a la recuperación muscular</li>
-
           <li>Ideal después del entrenamiento</li>
-
           <li>Favorece el desarrollo muscular</li>
+
         </ul>
+
 
         <!-- CREATINA -->
-
         <ul *ngIf="producto.categoria.nombre.includes('Creat')">
+
           <li>Mejora la fuerza y potencia</li>
-
           <li>Aumenta el rendimiento deportivo</li>
-
           <li>Ideal para entrenamientos intensos</li>
-
           <li>Favorece la recuperación muscular</li>
+
         </ul>
 
+
         <!-- BOLSAS DE PROTEINA -->
-<ul *ngIf="producto.categoria.nombre.includes('Bolsa')">
-  <li>Formato económico de mayor rendimiento</li>
-  <li>Ideal para consumo diario prolongado</li>
-  <li>Misma calidad nutricional que el formato en pote</li>
-  <li>Fácil de almacenar y dosificar</li>
-</ul>
+        <ul *ngIf="producto.categoria.nombre.includes('Bolsa')">
 
-<!-- PRE-ENTRENO -->
-<ul *ngIf="producto.categoria.nombre.includes('Pre-entreno')">
-  <li>Aumenta la energía y el enfoque mental</li>
-  <li>Mejora el rendimiento durante el entrenamiento</li>
-  <li>Retrasa la fatiga muscular</li>
-  <li>Favorece la vasodilatación y el bombeo muscular</li>
-</ul>
+          <li>Formato económico de mayor rendimiento</li>
+          <li>Ideal para consumo diario prolongado</li>
+          <li>Misma calidad nutricional que el formato en pote</li>
+          <li>Fácil de almacenar y dosificar</li>
 
-<!-- PRECURSORES -->
-<ul *ngIf="producto.categoria.nombre.includes('Precursor')">
-  <li>Estimula la producción hormonal natural</li>
-  <li>Favorece el aumento de masa muscular</li>
-  <li>Mejora la recuperación post-entrenamiento</li>
-  <li>Apoya el rendimiento físico general</li>
-</ul>
+        </ul>
+
+
+        <!-- PRE-ENTRENO -->
+        <ul *ngIf="producto.categoria.nombre.includes('Pre-entreno')">
+
+          <li>Aumenta la energía y el enfoque mental</li>
+          <li>Mejora el rendimiento durante el entrenamiento</li>
+          <li>Retrasa la fatiga muscular</li>
+          <li>Favorece la vasodilatación y el bombeo muscular</li>
+
+        </ul>
+
+
+        <!-- PRECURSORES -->
+        <ul *ngIf="producto.categoria.nombre.includes('Precursor')">
+
+          <li>Estimula la producción hormonal natural</li>
+          <li>Favorece el aumento de masa muscular</li>
+          <li>Mejora la recuperación post-entrenamiento</li>
+          <li>Apoya el rendimiento físico general</li>
+
+        </ul>
+
 
       </div>
+
     </div>
+
+
 
     <!-- ESPECIFICACIONES -->
 
     <div class="col-md-6">
+
       <div class="bg-white shadow rounded p-4 h-100">
-        <h3 class="fw-bold">📋 Especificaciones</h3>
+
+        <h3 class="fw-bold">
+          📋 Especificaciones
+        </h3>
+
 
         <table class="table mt-3">
+
           <tr>
             <td class="fw-bold">Nombre</td>
-
-            <td>
-              {{ producto.nombre }}
-            </td>
+            <td>{{ producto.nombre }}</td>
           </tr>
 
           <tr>
             <td class="fw-bold">Categoría</td>
-
-            <td>
-              {{ producto.categoria.nombre }}
-            </td>
+            <td>{{ producto.categoria.nombre }}</td>
           </tr>
 
           <tr>
             <td class="fw-bold">Precio</td>
-
             <td>S/ {{ producto.precio }}</td>
           </tr>
 
           <tr>
             <td class="fw-bold">Stock</td>
-
             <td>{{ producto.stock }} unidades</td>
           </tr>
 
           <tr>
             <td class="fw-bold">Estado</td>
-
             <td>Disponible</td>
           </tr>
+
         </table>
+
       </div>
+
     </div>
+
   </div>
+
 </div>
+
+
 <app-footer></app-footer>
+
+
+
+<!-- Modal Producto Agregado -->
+<div class="modal fade"
+     id="productoAgregadoModal"
+     tabindex="-1"
+     aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+
+      <div class="modal-header bg-success text-white">
+
+        <h5 class="modal-title">
+          Producto agregado
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          (click)="cerrarModal()">
+        </button>
+
+      </div>
+
+
+      <div class="modal-body text-center">
+
+        <h1>✅</h1>
+
+        <p class="mb-0">
+          El producto fue agregado correctamente al carrito.
+        </p>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="cerrarModal()">
+          Seguir comprando
+        </button>
+
+
+        <a
+          routerLink="/carrito"
+          class="btn btn-success">
+          Ir al carrito
+        </a>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
